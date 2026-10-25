@@ -264,20 +264,20 @@ function fillSettingsForm() {
   for (const key of ["business_name", "business_name_ar", "about_en", "about_ar", "about_eyebrow_en", "about_title_en", "about_lead_en", "about_story_eyebrow_en", "about_story_heading_en", "about_story_en", "about_story_secondary_en", "owner_name", "owner_eyebrow_en", "owner_role", "owner_bio", "about_primary_color", "about_background_color", "about_surface_color", "about_accent_color", "about_values_eyebrow_en", "about_contact_eyebrow_en", "about_contact_title_en", "about_contact_text_en", "currency", "locale", "contact_email", "contact_phone", "business_address", "low_stock_threshold"]) {
     form.elements[key].value = settings[key] ?? "";
   }
-  currentStoreLogoPath = settings.logo_path || null;
+  currentStoreLogoPath = imagePathOrNull(settings.logo_path);
   selectedStoreLogoFile = null;
   document.querySelector("#store-logo-file").value = "";
   if (storeLogoPreviewObjectUrl) URL.revokeObjectURL(storeLogoPreviewObjectUrl);
   storeLogoPreviewObjectUrl = null;
   renderStoreLogoPreview(settings.logo_url || null);
-  currentStoreCoverPath = settings.cover_path || null;
+  currentStoreCoverPath = imagePathOrNull(settings.cover_path);
   selectedStoreCoverFile = null;
   document.querySelector("#store-cover-file").value = "";
   if (storeCoverPreviewObjectUrl) URL.revokeObjectURL(storeCoverPreviewObjectUrl);
   storeCoverPreviewObjectUrl = null;
   renderStoreCoverPreview(settings.cover_url || null);
   form.elements.cover_fit.value = settings.cover_fit || "cover";
-  currentOwnerImagePath = settings.owner_image_path || null;
+  currentOwnerImagePath = imagePathOrNull(settings.owner_image_path);
   selectedOwnerImageFile = null;
   document.querySelector("#owner-image-file").value = "";
   if (ownerImagePreviewObjectUrl) URL.revokeObjectURL(ownerImagePreviewObjectUrl);
@@ -359,7 +359,7 @@ function showView(viewName) {
 function fillProductForm(product = null) {
   editingProductId = product?.id || null;
   selectedImageFile = null;
-  currentImagePath = product?.image_path || null;
+  currentImagePath = imagePathOrNull(product?.image_path);
   document.querySelector("#product-image").value = "";
   const categoryOptions = document.querySelector("#category-options");
   categoryOptions.replaceChildren(...categories.filter((category) => category.active).map((category) => {
@@ -403,7 +403,7 @@ function productPayload() {
     background_color: productForm.elements.background_color.value,
     badge: productForm.elements.badge.value.trim(),
     note: productForm.elements.note.value.trim(),
-    image_path: currentImagePath,
+    image_path: imagePathOrNull(currentImagePath),
     active: productForm.elements.active.checked
   };
 }
@@ -420,14 +420,21 @@ function renderImagePreview(source) {
 async function uploadSelectedImage() {
   if (!selectedImageFile) return;
   const result = await uploadImage(selectedImageFile);
-  currentImagePath = result.image_path;
+  currentImagePath = imagePathOrNull(result.image_path);
   selectedImageFile = null;
 }
 
 async function uploadImage(file) {
+  if (!(file instanceof File)) {
+    throw new Error("Select a valid image file from your device.");
+  }
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("file", file, file.name || "upload");
   return api("/api/admin/uploads", { method: "POST", body: formData });
+}
+
+function imagePathOrNull(value) {
+  return typeof value === "string" && value.length > 0 ? value : null;
 }
 
 async function refreshAfterMutation(message) {
@@ -726,17 +733,17 @@ document.querySelector("#settings-form").addEventListener("submit", async (event
     const values = new FormData(form);
     if (selectedStoreLogoFile) {
       const uploadedLogo = await uploadImage(selectedStoreLogoFile);
-      currentStoreLogoPath = uploadedLogo.image_path;
+      currentStoreLogoPath = imagePathOrNull(uploadedLogo.image_path);
       selectedStoreLogoFile = null;
     }
     if (selectedStoreCoverFile) {
       const uploadedCover = await uploadImage(selectedStoreCoverFile);
-      currentStoreCoverPath = uploadedCover.image_path;
+      currentStoreCoverPath = imagePathOrNull(uploadedCover.image_path);
       selectedStoreCoverFile = null;
     }
     if (selectedOwnerImageFile) {
       const uploadedOwnerImage = await uploadImage(selectedOwnerImageFile);
-      currentOwnerImagePath = uploadedOwnerImage.image_path;
+      currentOwnerImagePath = imagePathOrNull(uploadedOwnerImage.image_path);
       selectedOwnerImageFile = null;
     }
     await api("/api/admin/settings", {
@@ -763,7 +770,7 @@ document.querySelector("#settings-form").addEventListener("submit", async (event
         owner_eyebrow_en: values.get("owner_eyebrow_en"),
         owner_role: values.get("owner_role"),
         owner_bio: values.get("owner_bio"),
-        owner_image_path: currentOwnerImagePath,
+        owner_image_path: imagePathOrNull(currentOwnerImagePath),
         about_primary_color: values.get("about_primary_color"),
         about_background_color: values.get("about_background_color"),
         about_surface_color: values.get("about_surface_color"),
@@ -777,8 +784,8 @@ document.querySelector("#settings-form").addEventListener("submit", async (event
         contact_email: values.get("contact_email"),
         contact_phone: values.get("contact_phone"),
         business_address: values.get("business_address"),
-        logo_path: currentStoreLogoPath,
-        cover_path: currentStoreCoverPath,
+        logo_path: imagePathOrNull(currentStoreLogoPath),
+        cover_path: imagePathOrNull(currentStoreCoverPath),
         cover_fit: values.get("cover_fit"),
         low_stock_threshold: Number(values.get("low_stock_threshold"))
       })
