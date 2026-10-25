@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eaf5f6" />
+    <meta name="description" content="Everyday plastic essentials for home, storage, and more from Al Majid Plastic." />
+    <title>Al Majid Plastic | Everyday essentials, made useful</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="store.js" defer></script>
+  </head>
+  <body>
+    <div class="announcement" data-i18n="announcement">Useful things. Fair prices. Delivered with care.</div>
+    <header class="site-header">
+      <a class="brand" href="#top" id="header-brand-link" aria-label="Al Majid Plastic home">
+        <span class="brand-mark" id="header-brand-mark" aria-hidden="true"><i></i><i></i><i></i><img id="header-brand-image" alt="" hidden /></span>
+        <span class="brand-name">AL MAJID <small>PLASTIC</small></span>
+      </a>
+      <label class="search-box">
+        <span class="sr-only">Search products</span>
+        <span class="search-symbol" aria-hidden="true"></span>
+        <input id="search" type="search" placeholder="What are you looking for?" aria-label="Search products" autocomplete="off" />
+        <kbd>/</kbd>
+      </label>
+      <div class="header-actions">
+        <div class="language-switch" role="group" aria-label="Language">
+          <button type="button" data-language-choice="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" data-language-choice="ar" lang="ar" aria-label="العربية" aria-pressed="false">عربي</button>
+        </div>
+        <button class="favorites-button" id="toggle-favorites" type="button" aria-pressed="false" aria-label="Show favorites, 0 saved">
+          <span class="favorite-symbol" aria-hidden="true">&#9825;</span><span class="favorites-label">Saved</span><span class="favorites-count" id="favorites-count">0</span>
+        </button>
+        <button class="account-button" id="open-account" type="button" aria-label="Open account"><span class="account-symbol" aria-hidden="true">&#9673;</span><span id="account-label">Sign in</span></button>
+        <button class="basket-button" id="open-cart" type="button" aria-label="Open basket, 0 items">
+          <span class="basket-symbol" aria-hidden="true"></span><span>Basket</span><span class="basket-count" id="basket-count">0</span>
+        </button>
+      </div>
+    </header>
+    <nav class="category-nav" aria-label="Product categories" id="category-navigation">
+      <div class="nav-inner">
+        <button class="nav-category is-active" data-category="All products" type="button">All products</button>
+        <button class="nav-category" data-category="Kitchen" type="button">Kitchen</button>
+        <button class="nav-category" data-category="Storage" type="button">Storage</button>
+        <button class="nav-category" data-category="Cleaning" type="button">Cleaning</button>
+        <button class="nav-category" data-category="Home & garden" type="button">Home &amp; garden</button>
+        <span class="nav-note">Everyday essentials, thoughtfully chosen</span>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> <span data-i18n="heroEyebrow">Made for the everyday</span></p>
+          <h1 id="hero-title" data-i18n-html="heroTitle">Good things belong in <em>strong</em> containers.</h1>
+          <p class="hero-description" data-i18n="heroDescription">Practical pieces for busy kitchens, tidy corners, and the little jobs that make a house feel like home.</p>
+          <a class="hero-cta" href="#catalog"><span data-i18n="heroCta">Shop the collection</span><span aria-hidden="true">&#8594;</span></a>
+          <div class="hero-note"><span class="note-rule"></span><span data-i18n="heroNote">SIMPLE. USEFUL. READY FOR REAL LIFE.</span></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of colorful household containers" role="img" id="hero-art">
+          <div class="art-sun"></div>
+          <div class="art-plant"><i></i><i></i><i></i><b></b></div>
+          <div class="hero-bucket bucket-back"><i></i><b></b></div>
+          <div class="hero-bucket bucket-front"><i></i><b></b></div>
+          <div class="hero-canister"><i></i><b></b></div>
+          <div class="art-ground"></div>
+          <span class="art-label">A place for everything</span>
+        </div>
+        <div class="hero-index" aria-hidden="true">01 <span>/</span> 04</div>
+      </section>
+
+      <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
+        <div class="catalog-heading">
+          <div>
+            <p class="eyebrow" data-i18n="catalogEyebrow">The useful edit</p>
+            <h2 id="catalog-title" data-i18n="catalogTitle">Shop everyday essentials</h2>
+          </div>
+          <label class="sort-control">
+            <span data-i18n="sortBy">Sort by</span>
+            <select id="sort-products" aria-label="Sort products">
+              <option value="featured" data-i18n="sortFeatured">Featured</option>
+              <option value="price-low" data-i18n="sortLow">Price: low to high</option>
+              <option value="price-high" data-i18n="sortHigh">Price: high to low</option>
+              <option value="name" data-i18n="sortName">Name</option>
+            </select>
+          </label>
+        </div>
+        <div class="catalog-toolbar">
+          <div class="filter-list" role="group" aria-label="Filter by category">
+            <button class="filter-chip is-selected" data-category="All products" type="button">All <span id="all-product-count">8</span></button>
+            <button class="filter-chip" data-category="Kitchen" type="button">Kitchen</button>
+            <button class="filter-chip" data-category="Storage" type="button">Storage</button>
+            <button class="filter-chip" data-category="Cleaning" type="button">Cleaning</button>
+            <button class="filter-chip" data-category="Home & garden" type="button">Home &amp; garden</button>
+          </div>
+          <p class="result-count" id="result-count" aria-live="polite">8 useful finds</p>
+        </div>
+        <p class="store-error" id="store-error" role="alert" hidden></p>
+        <div class="product-grid" id="product-grid"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span class="empty-mark" aria-hidden="true">?</span>
+          <h3 data-i18n="emptyTitle">No matches this time</h3>
+          <p data-i18n="emptyDescription">Try another search or choose a different category.</p>
+          <button class="text-button" id="clear-filters" type="button" data-i18n="clearFilters">Clear filters</button>
+        </div>
+      </section>
+
+      <section class="service-strip" aria-label="Store information">
+        <div><span class="service-mark delivery-mark" aria-hidden="true"></span><p><strong data-i18n="serviceDelivery">Delivery that fits your day</strong><small data-i18n="serviceDeliveryNote">Local delivery options at checkout</small></p></div>
+        <div><span class="service-mark quality-mark" aria-hidden="true"></span><p><strong data-i18n="serviceQuality">Useful by design</strong><small data-i18n="serviceQualityNote">Everyday pieces picked to last</small></p></div>
+        <div><span class="service-mark support-mark" aria-hidden="true"></span><p><strong data-i18n="serviceSupport">Here to help</strong><small data-i18n="serviceSupportNote">Questions? Our team is happy to help</small></p></div>
+      </section>
+
+      <section class="about-section" id="about" aria-labelledby="about-title">
+        <div class="about-heading"><p class="eyebrow" data-i18n="aboutEyebrow">A little about us</p><h2 id="about-title" data-i18n="aboutTitle">Practical goods, chosen with care.</h2></div>
+        <p class="about-copy" id="about-copy"></p>
+      </section>
+
+      <section class="outlets-section" id="outlets" aria-labelledby="outlets-title">
+        <div class="outlets-heading"><div><p class="eyebrow" data-i18n="outletsEyebrow">Come by</p><h2 id="outlets-title" data-i18n="outletsTitle">Our outlets</h2></div></div>
+        <div class="outlets-grid" id="outlets-grid"></div>
+        <p class="outlets-empty" id="outlets-empty" data-i18n="outletsEmpty" hidden>Outlet details will be added soon.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div class="footer-intro">
+          <a class="brand footer-brand" href="#top">
+            <span class="brand-mark" id="footer-brand-mark" aria-hidden="true"><i></i><i></i><i></i><img id="footer-brand-image" alt="" hidden /></span>
+            <span class="brand-name">AL MAJID <small>PLASTIC</small></span>
+          </a>
+          <p data-i18n="footerTagline">Practical essentials for everyday living.</p>
+          <p class="footer-contact" id="store-contact"></p>
+        </div>
+        <div class="footer-column">
+          <h2>Shop</h2>
+          <a href="#catalog">All products</a>
+          <a href="#catalog">Featured finds</a>
+          <a href="/about">About us</a>
+        </div>
+        <div class="footer-column">
+          <h2>Need help?</h2>
+          <a href="#outlets">Our outlets</a>
+          <a href="#catalog">Delivery information</a>
+          <a href="#outlets">Find a store</a>
+        </div>
+        <div class="footer-signup">
+          <p class="eyebrow">Stay in the loop</p>
+          <p>New arrivals, useful offers, and store updates.</p>
+          <a class="footer-link" href="#outlets">Find your nearest outlet <span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; <span id="year"></span> <span id="footer-business-name">Al Majid Plastic</span></span>
+        <span>Practical goods, chosen with care.</span>
+      </div>
+    </footer>
+
+    <div class="overlay" id="overlay" hidden></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title" aria-modal="true" role="dialog" hidden>
+      <div class="drawer-header">
+        <div><p class="eyebrow" data-i18n="cartEyebrow">Your useful finds</p><h2 id="cart-title"><span data-i18n="cartTitle">Your basket</span> <span id="drawer-count">(0)</span></h2></div>
+        <button class="close-button" type="button" data-close aria-label="Close basket">&#215;</button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-empty" id="cart-empty"><span class="empty-basket" aria-hidden="true"></span><h3 data-i18n="cartEmptyTitle">Your basket is waiting</h3><p data-i18n="cartEmptyDescription">Find something useful for your home.</p><button class="text-button" type="button" data-close data-i18n="browseProducts">Browse products</button></div>
+      <div class="cart-footer" id="cart-footer" hidden>
+        <div class="subtotal-row"><span data-i18n="subtotal">Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+        <p class="shipping-note" data-i18n="shippingNote">Delivery is calculated when you place your order request.</p>
+        <button class="checkout-button" id="checkout-button" type="button"><span data-i18n="continueCheckout">Continue to checkout</span><span aria-hidden="true">&#8594;</span></button>
+        <p class="demo-note" data-i18n="noPaymentNote">Payment is arranged with the store.</p>
+      </div>
+    </aside>
+
+    <section class="checkout-modal" id="checkout-modal" aria-labelledby="checkout-title" aria-modal="true" role="dialog" hidden>
+      <button class="close-button modal-close" type="button" data-close aria-label="Close checkout">&#215;</button>
+      <span class="checkout-stamp" aria-hidden="true">AM</span>
+      <p class="eyebrow" data-i18n="orderRequest">Order request</p>
+      <h2 id="checkout-title" data-i18n="checkoutTitle">Complete your order.</h2>
+      <p data-i18n="checkoutDescription">Send your order to our team. We will contact you to confirm delivery and payment arrangements.</p>
+      <form id="order-form">
+        <div class="order-form-grid">
+          <label><span data-i18n="fullName">Full name</span><input name="customer_name" autocomplete="name" required minlength="2" maxlength="100" /></label>
+          <label><span data-i18n="email">Email</span><input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+          <label><span data-i18n="phone">Phone</span><input name="phone" type="tel" autocomplete="tel" required minlength="5" maxlength="40" /></label>
+          <label class="address-field"><span data-i18n="deliveryAddress">Delivery address</span><textarea name="delivery_address" autocomplete="street-address" required minlength="8" maxlength="500" rows="2"></textarea></label>
+        </div>
+        <p class="order-error" id="order-error" role="alert" hidden></p>
+        <div class="order-total"><span data-i18n="orderSubtotal">Order subtotal</span><strong id="order-total">$0.00</strong></div>
+        <button class="checkout-button" id="place-order" type="submit"><span data-i18n="submitOrder">Submit order request</span><span aria-hidden="true">&#8594;</span></button>
+        <p class="demo-note" data-i18n="paymentArrangeNote">Payment is not collected online. Our team will arrange it with you.</p>
+      </form>
+      <div class="order-success" id="order-success" hidden>
+        <p data-i18n="orderReceived">Your order request has been received.</p>
+        <p><span data-i18n="reference">Reference:</span> <strong id="order-reference"></strong></p>
+        <button class="checkout-button" type="button" data-close data-i18n="backToStore">Back to the store</button>
+      </div>
+    </section>
+    <section class="account-modal" id="account-modal" aria-labelledby="account-title" aria-modal="true" role="dialog" hidden>
+      <button class="close-button modal-close" type="button" data-close aria-label="Close account">&#215;</button>
+      <div class="account-heading">
+        <span class="account-mark" aria-hidden="true">AM</span>
+        <div><p class="account-kicker">Al Majid Plastic</p><h2 id="account-title">Welcome back</h2></div>
+      </div>
+      <p class="account-subtitle">Sign in to save your details and track your orders.</p>
+      <div id="account-auth-view">
+        <div class="account-provider-buttons">
+          <a class="provider-button google-provider" href="/api/auth/google/start"><span class="provider-icon">G</span>Continue with Google</a>
+          <a class="provider-button facebook-provider" href="/api/auth/facebook/start"><span class="provider-icon">f</span>Continue with Facebook</a>
+        </div>
+        <p class="account-divider"><span>or continue with email</span></p>
+        <form id="account-form">
+          <label id="account-name-field"><span>Full name</span><input name="full_name" autocomplete="name" minlength="2" maxlength="100" /></label>
+          <label><span>Email address</span><input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+          <label><span>Password</span><input name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="256" /></label>
+          <p class="order-error" id="account-error" role="alert" hidden></p>
+          <button class="checkout-button account-submit" id="account-submit" type="submit">Create account <span aria-hidden="true">&#8594;</span></button>
+        </form>
+        <button class="text-button account-switch" id="account-switch" type="button">Already have an account? Sign in</button>
+      </div>
+      <div id="account-signed-in" hidden>
+        <p>Signed in as <strong id="account-user-name"></strong>.</p>
+        <p id="account-user-email"></p>
+        <button class="checkout-button" id="account-logout" type="button">Sign out</button>
+      </div>
+    </section>
+    <dialog class="product-detail-dialog" id="product-detail-dialog" aria-labelledby="product-detail-title">
+      <button class="close-button detail-close" id="close-product-detail" type="button" aria-label="Close product details">&#215;</button>
+      <div class="product-detail-layout" id="product-detail-content"></div>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

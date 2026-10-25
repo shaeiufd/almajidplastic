@@ -1,0 +1,1309 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Al Majid Store",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000",
+				"--reload"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "Run shop Django server",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"manage.py",
+				"runserver",
+				"127.0.0.1:8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect shop entrypoints",
+			"type": "shell",
+			"command": "Get-ChildItem -Force; Write-Output '--- files ---'; Get-ChildItem -Recurse -File -Exclude node_modules | Select-Object -ExpandProperty FullName",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read shop run configuration",
+			"type": "shell",
+			"command": "Get-Content README.md; Write-Output '--- main.py ---'; Get-Content app\\main.py; Write-Output '--- requirements ---'; Get-Content requirements.txt; Get-Content requirements-dev.txt",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop API",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop tests",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect frontend scripts",
+			"type": "shell",
+			"command": "Write-Output '--- store.js headings ---'; Select-String -Path store.js -Pattern 'function|const |addEventListener|innerHTML|fetch' | Select-Object -First 160; Write-Output '--- admin.js headings ---'; Select-String -Path admin.js -Pattern 'function|const |addEventListener|innerHTML|fetch' | Select-Object -First 160",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect frontend scripts 2",
+			"type": "shell",
+			"command": "Write-Output '--- store.js headings ---'; Select-String -Path store.js -Pattern 'function|const |addEventListener|innerHTML|fetch' | Select-Object -First 160; Write-Output '--- admin.js headings ---'; Select-String -Path admin.js -Pattern 'function|const |addEventListener|innerHTML|fetch' | Select-Object -First 160",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect basket frontend handler",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[180..325]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect cart loading",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[1..90]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect store initialization",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[380..430]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Find frontend text issues",
+			"type": "shell",
+			"command": "Select-String -Path *.html,*.js,*.css -Pattern 'آ·|Ã|Â|�'",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect contact separator",
+			"type": "shell",
+			"command": "Select-String -Path store.js -Pattern 'store-contact' -Context 0,2",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect contact separator 2",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[393..401]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify contact separator fix",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[393..401]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect separator encoding",
+			"type": "shell",
+			"command": "$line=(Get-Content store.js)[399]; ($line.ToCharArray() | ForEach-Object {[int][char]$_}) -join ','",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect separator encoding 2",
+			"type": "shell",
+			"command": "$line=(Get-Content store.js)[398]; Write-Output $line; ($line.ToCharArray() | ForEach-Object {[int][char]$_}) -join ','",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify frontend patch",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[393..402]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify frontend patch 2",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[396..404]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify shop after frontend fix",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect storefront layout",
+			"type": "shell",
+			"command": "Write-Output '--- html structure ---'; Select-String -Path index.html -Pattern '<header|<nav|<main|<section|footer|newsletter|catalog|hero|info' | Select-Object -First 200; Write-Output '--- css sections ---'; Select-String -Path styles.css -Pattern '^\\.|^#|@media|header|hero|catalog|footer|trust|newsletter' | Select-Object -First 240",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read footer markup",
+			"type": "shell",
+			"command": "$lines=Get-Content index.html; $lines[100..138]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect language translations",
+			"type": "shell",
+			"command": "Select-String -Path store.js -Pattern 'footerTagline|aboutTitle|translations|i18n' -Context 1,2 | Select-Object -First 100",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect responsive footer styles",
+			"type": "shell",
+			"command": "$lines=Get-Content styles.css; $lines[275..335]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect mobile footer styles",
+			"type": "shell",
+			"command": "$lines=Get-Content styles.css; $lines[335..370]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop tests after storefront update",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect storefront default content",
+			"type": "shell",
+			"command": "Select-String -Path store.js -Pattern 'about-copy|outlets-empty|outlets-grid|business_name|about_en' -Context 2,3 | Select-Object -First 140",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect storefront content binding",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[420..490]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect storefront content binding 2",
+			"type": "shell",
+			"command": "Select-String -Path store.js -Pattern 'about|outlets|business_address|contact_email'",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read store initialization block",
+			"type": "shell",
+			"command": "$lines=Get-Content store.js; $lines[360..416]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read store script ending",
+			"type": "shell",
+			"command": "Get-Content store.js -Tail 15",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify storefront improvements",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect cover and settings implementation",
+			"type": "shell",
+			"command": "Write-Output '--- database settings ---'; Select-String -Path app\\database.py -Pattern 'store_settings|logo_path|CREATE TABLE' -Context 2,8; Write-Output '--- backend settings ---'; Select-String -Path app\\main.py -Pattern 'StoreSettingsInput|settings_response|logo_path|upload' -Context 2,8 | Select-Object -First 180; Write-Output '--- settings markup ---'; Select-String -Path admin.html -Pattern 'settings-form|store-logo|logo|low-stock' -Context 2,8; Write-Output '--- storefront hero ---'; $lines=Get-Content index.html; $lines[45..70]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect admin logo flow",
+			"type": "shell",
+			"command": "$lines=Get-Content admin.js; $lines[250..285]; Write-Output '---'; $lines[620..665]; Write-Output '---'; $lines[450..490]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect admin state variables",
+			"type": "shell",
+			"command": "$lines=Get-Content admin.js; $lines[1..30]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read cover listener insertion point",
+			"type": "shell",
+			"command": "$lines=Get-Content admin.js; $lines[475..520]",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect admin image preview styles",
+			"type": "shell",
+			"command": "Select-String -Path admin.css -Pattern 'image-preview|logo-preview|settings-address' -Context 1,3",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart shop API process",
+			"type": "shell",
+			"command": "$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop API with cover support",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run tests after cover feature",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check cover fit backend fields",
+			"type": "shell",
+			"command": "Select-String -Path app\\main.py -Pattern 'cover_fit' -Context 1,2",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart shop API for resize option",
+			"type": "shell",
+			"command": "$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop API resize option",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run tests after resize option",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect customer authentication foundation",
+			"type": "shell",
+			"command": "Get-Content app\\security.py; Write-Output '--- database seed tail ---'; $lines=Get-Content app\\database.py; $lines[150..230]; Write-Output '--- login frontend markers ---'; Select-String -Path index.html,store.js,styles.css -Pattern 'account|login|sign|customer'",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect auth environment keys",
+			"type": "shell",
+			"command": "if (Test-Path app\\.env) { Get-Content app\\.env | ForEach-Object { if ($_ -match '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*=') { $matches[1] } } } else { Write-Output 'MISSING' }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check auth env file",
+			"type": "shell",
+			"command": "Test-Path -LiteralPath app\\.env",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check auth env names",
+			"type": "shell",
+			"command": "Get-Content -LiteralPath app\\.env | ForEach-Object { $line = $_; if ($line -match '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*=') { Write-Output ($matches[1] + '=***') } else { Write-Output '[non-secret line]' } }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check auth env size",
+			"type": "shell",
+			"command": "(Get-Item -LiteralPath app\\.env).Length",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify OAuth environment keys",
+			"type": "shell",
+			"command": "Get-Content -LiteralPath app\\.env | ForEach-Object { if ($_ -match '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*(.+)$') { $value = $matches[2].Trim(); Write-Output ($matches[1] + '=' + $(if ($value -and $value -notmatch '^your_') {'SET'} else {'MISSING_OR_PLACEHOLDER'})) } }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify final OAuth credentials",
+			"type": "shell",
+			"command": "Get-Content -LiteralPath app\\.env | ForEach-Object { if ($_ -match '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*(.+)$') { $value = $matches[2].Trim(); Write-Output ($matches[1] + '=' + $(if ($value -and $value -notmatch '^your_' -and $value -notmatch '^YOUR_') {'SET'} else {'MISSING_OR_PLACEHOLDER'})) } }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect final auth env format",
+			"type": "shell",
+			"command": "Get-Content -LiteralPath app\\.env | ForEach-Object { Write-Output ('LINE_LENGTH=' + $_.Length) }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate auth env syntax",
+			"type": "shell",
+			"command": "Get-Content -LiteralPath app\\.env | ForEach-Object { if ($_ -like '*=*') { 'VALID_KEY_LINE' } else { 'INVALID_KEY_LINE' } }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check OAuth environment format",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$path='C:\\Users\\123\\OneDrive\\Desktop\\shop\\app\\.env'; if (-not (Test-Path -LiteralPath $path)) { Write-Output 'FILE_MISSING'; exit 0 }; $expected=@('GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','FACEBOOK_APP_ID','FACEBOOK_APP_SECRET'); $seen=@{}; Get-Content -LiteralPath $path | ForEach-Object { $line=$_.Trim(); if (-not $line -or $line.StartsWith('#')) { return }; if ($line -match '^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*(.*)\\s*$') { $key=$matches[1]; $value=$matches[2].Trim(); $seen[$key]=$true; $status=if ($value -and $value -notmatch '^(your_|YOUR_|replace_|REPLACE_|<|>)') {'SET'} else {'MISSING_OR_PLACEHOLDER'}; Write-Output ($key+'='+$status) } else { Write-Output 'INVALID_KEY_LINE' } }; foreach ($key in $expected) { if (-not $seen.ContainsKey($key)) { Write-Output ($key+'=MISSING') } }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check OAuth variables safely",
+			"type": "shell",
+			"command": "powershell -NoProfile -Command \"$path='C:\\Users\\123\\OneDrive\\Desktop\\shop\\app\\.env'; if (!(Test-Path -LiteralPath $path)) { 'FILE_MISSING'; exit }; Get-Content -LiteralPath $path | ForEach-Object { $parts=$_.Split('=',2); if ($parts.Count -eq 2) { $value=$parts[1].Trim(); if ($value.Length -gt 0) { $parts[0].Trim() + '=SET' } else { $parts[0].Trim() + '=EMPTY' } } elseif ($_.Trim().Length -gt 0 -and !$_.Trim().StartsWith('#')) { 'INVALID_KEY_LINE' } }\"",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "List OAuth env keys",
+			"type": "shell",
+			"command": "cmd",
+			"args": [
+				"/c",
+				"for /f \"usebackq tokens=1 delims==\" %A in (\"app\\.env\") do @if not \"%A\"==\"\" echo %A"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate OAuth env keys",
+			"type": "shell",
+			"command": "powershell -NoProfile -Command \"Get-Content -LiteralPath 'app\\.env' | ForEach-Object { `$line=`$_.Trim(); if (`$line -and !`$line.StartsWith('#')) { `$i=`$line.IndexOf('='); if (`$i -ge 1) { `$key=`$line.Substring(0,`$i).Trim(); `$value=`$line.Substring(`$i+1).Trim(); if (`$value.Length -gt 0) { Write-Output (`$key + '=SET') } else { Write-Output (`$key + '=EMPTY') } } else { Write-Output 'INVALID_KEY_LINE' } } }\"",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Masked OAuth env check",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path(r'app/.env'); expected=['GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','FACEBOOK_APP_ID','FACEBOOK_APP_SECRET']; seen={}; print('FILE_MISSING') if not p.exists() else None; lines=p.read_text(encoding='utf-8').splitlines() if p.exists() else []; [print('INVALID_KEY_LINE') if line.strip() and not line.lstrip().startswith('#') and '=' not in line else (print(line.split('=',1)[0].strip() + ('=SET' if line.split('=',1)[1].strip() else '=EMPTY')) if '=' in line else None) for line in lines]; [print(k+'=MISSING') for k in expected if k not in {line.split('=',1)[0].strip() for line in lines if '=' in line}]"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Masked OAuth env check 2",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-c",
+				"from pathlib import Path; p=Path(\"app/.env\"); expected=[\"GOOGLE_CLIENT_ID\",\"GOOGLE_CLIENT_SECRET\",\"FACEBOOK_APP_ID\",\"FACEBOOK_APP_SECRET\"]; lines=p.read_text(encoding=\"utf-8\").splitlines() if p.exists() else []; print(\"FILE_MISSING\") if not p.exists() else None; keys={}; [keys.setdefault(line.split(\"=\",1)[0].strip(), line.split(\"=\",1)[1].strip()) if \"=\" in line and line.strip() and not line.lstrip().startswith(\"#\") else (print(\"INVALID_KEY_LINE\") if line.strip() and not line.lstrip().startswith(\"#\") else None) for line in lines]; [print(k + (\"=SET\" if keys[k] else \"=EMPTY\")) for k in keys]; [print(k+\"=MISSING\") for k in expected if k not in keys]"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run masked OAuth env check",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				".oauth_env_check.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate temporary checker",
+			"type": "shell",
+			"command": "where",
+			"args": [
+				"/r",
+				"C:\\Users\\123\\OneDrive\\Desktop\\shop",
+				".oauth_env_check.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Find checker file",
+			"type": "shell",
+			"command": "Get-ChildItem",
+			"args": [
+				"-LiteralPath",
+				".",
+				"-Filter",
+				".oauth_env_check.py",
+				"-Force",
+				"-Recurse",
+				"|",
+				"Select-Object",
+				"-ExpandProperty",
+				"FullName"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Remove temporary checker",
+			"type": "shell",
+			"command": "Remove-Item",
+			"args": [
+				"-LiteralPath",
+				"C:\\Users\\123\\OneDrive\\Desktop\\shop\\.oauth_env_check.py",
+				"-Force"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read Python coding guidance",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"C:\\Users\\123\\AppData\\Roaming\\Code\\agentPlugins\\vscode-synced-customization-agent-host-codex-289198613\\1745758948\\skills\\python-fact-grounded-coding\\SKILL.md"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect auth integration points",
+			"type": "shell",
+			"command": "rg",
+			"args": [
+				"-n",
+				"FastAPI|SessionMiddleware|/api/|checkout|customer|login|oauth|admin_users|orders",
+				"app",
+				"index.html",
+				"store.js",
+				"tests"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect auth integration points 2",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-Path",
+				"app\\*.py",
+				"index.html",
+				"store.js",
+				"tests\\*.py",
+				"-Pattern",
+				"FastAPI|SessionMiddleware|/api/|checkout|customer|login|oauth|admin_users|orders"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read main API",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"app\\main.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read database schema",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"app\\database.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read storefront account UI",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"index.html",
+				"-Pattern",
+				"checkout",
+				"cart",
+				"header",
+				"account"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read storefront markup",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"index.html"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check auth config placement",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"app\\main.py",
+				"-TotalCount",
+				"70"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read storefront script structure",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"store.js",
+				"-TotalCount",
+				"220"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read storefront event handlers",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"store.js",
+				"-Tail",
+				"220"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read stylesheet ending",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"styles.css",
+				"-Tail",
+				"20"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate customer auth code",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"py_compile",
+				"app\\main.py",
+				"app\\database.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run customer auth tests",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart shop server",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop server with auth",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Final auth validation",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Reload final shop server",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start final shop server",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Google OAuth client format",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"app\\.env"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect storefront layout rules",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"styles.css",
+				"-TotalCount",
+				"240"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read responsive text rules",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"styles.css",
+				"-Tail",
+				"120"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate responsive gutters",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"styles.css",
+				"-Pattern",
+				"catalog-section"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate about page files",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"py_compile",
+				"app\\main.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart shop for about page",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run shop with about page",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read Python change guidance",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"C:\\Users\\123\\AppData\\Roaming\\Code\\agentPlugins\\vscode-synced-customization-agent-host-codex-289198613\\1745758948\\skills\\python-fact-grounded-coding\\SKILL.md"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect admin settings form",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"admin.html",
+				"-Pattern",
+				"store-settings",
+				"business_name",
+				"about_en",
+				"cover_fit",
+				"logo_path"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read admin settings markup",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"admin.html"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect settings JavaScript",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"admin.js",
+				"-Pattern",
+				"fillSettingsForm"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read settings JavaScript",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"admin.js",
+				"-TotalCount",
+				"390"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read settings save handler",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"admin.js",
+				"-Pattern",
+				"save-settings",
+				"cover_path"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read settings save section",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"admin.js",
+				"-Tail",
+				"260"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate image settings handlers",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"admin.js",
+				"-Pattern",
+				"store-cover-file"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Read settings image handlers",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"admin.js",
+				"-Tail",
+				"370"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate cover admin styles",
+			"type": "shell",
+			"command": "Select-String",
+			"args": [
+				"-LiteralPath",
+				"admin.css",
+				"-Pattern",
+				"cover-preview"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate editable about settings",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Reload editable about page",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start editable about page",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Test about customization schema",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Reload final about customization",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$connection = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if ($connection) { Stop-Process -Id $connection.OwningProcess -Force }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start final about customization",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect deployment files",
+			"type": "shell",
+			"command": "Get-ChildItem",
+			"args": [
+				"-Force"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Python requirements",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				"requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check git status",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"--short"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect gitignore contents",
+			"type": "shell",
+			"command": "Get-Content",
+			"args": [
+				"-LiteralPath",
+				".gitignore"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run project tests after deployment setup",
+			"type": "shell",
+			"command": "c:/Users/123/OneDrive/Desktop/shop/.venv/Scripts/python.exe",
+			"args": [
+				"-m",
+				"unittest",
+				"discover",
+				"-s",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "List uploadable project files",
+			"type": "shell",
+			"command": "rg",
+			"args": [
+				"--files",
+				"app"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Shop Website",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--reload",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Git Repository",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"remote",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Find Git",
+			"type": "shell",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"@(\\\"C:\\\\Program Files\\\\Git\\\\cmd\\\\git.exe\\\",\\\"C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe\\\",\\\"C:\\\\Users\\\\123\\\\AppData\\\\Local\\\\Programs\\\\Git\\\\cmd\\\\git.exe\\\") | ForEach-Object { if (Test-Path -LiteralPath $_) { $_ } }"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate Git Executable",
+			"type": "shell",
+			"command": "where.exe",
+			"args": [
+				"git"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify Git Installed",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"--version"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify Git Path",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"--version"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Git Remote",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"remote",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Git Ignore Rules",
+			"type": "shell",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Get-Content -LiteralPath .gitignore"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Initialize Local Git Repository",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"init"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stage Website Files",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"add",
+				"."
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

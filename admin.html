@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#193b3e" />
+    <title>Store admin | Al Majid Plastic</title>
+    <link rel="stylesheet" href="/admin.css" />
+    <script src="/admin.js" defer></script>
+  </head>
+  <body class="admin-body">
+    <header class="admin-topbar">
+      <a class="admin-brand" href="/" aria-label="Al Majid Plastic storefront">
+        <span class="admin-brand-mark" id="admin-brand-mark" aria-hidden="true">AM<img id="admin-brand-image" alt="" hidden /></span>
+        <span>AL MAJID <small>PLASTIC</small></span>
+      </a>
+      <div class="admin-topbar-right">
+        <span class="admin-label">STORE ADMIN</span>
+        <a class="store-link" href="/">View storefront <span aria-hidden="true">&#8599;</span></a>
+        <button class="logout-button" id="logout-button" type="button" hidden>Sign out</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <section class="login-panel" id="login-panel" aria-labelledby="login-title">
+        <p class="admin-eyebrow">Al Majid Plastic</p>
+        <h1 id="login-title">Sign in to your store.</h1>
+        <p class="login-copy">Manage products, stock, and customer order requests.</p>
+        <form id="login-form">
+          <label>Username<input name="username" autocomplete="username" required minlength="3" maxlength="40" /></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" required maxlength="256" /></label>
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+          <button class="primary-button" type="submit">Sign in <span aria-hidden="true">&#8594;</span></button>
+        </form>
+      </section>
+
+      <section class="dashboard" id="dashboard" hidden>
+        <div class="dashboard-heading">
+          <div><p class="admin-eyebrow">Store operations</p><h1 id="view-title">Overview</h1></div>
+          <p class="welcome-label">Signed in as <strong id="admin-username"></strong></p>
+        </div>
+        <nav class="admin-tabs" aria-label="Admin sections">
+          <button class="admin-tab is-active" data-view="overview" type="button">Overview</button>
+          <button class="admin-tab" data-view="products" type="button">Products</button>
+          <button class="admin-tab" data-view="orders" type="button">Orders</button>
+          <button class="admin-tab" data-view="customers" type="button">Customers</button>
+          <button class="admin-tab" data-view="categories" type="button">Categories</button>
+          <button class="admin-tab" data-view="outlets" type="button">Outlets</button>
+          <button class="admin-tab" data-view="settings" type="button">Settings</button>
+        </nav>
+
+        <section class="overview-view admin-view" id="overview-view" aria-labelledby="overview-title">
+          <h2 id="overview-title" class="sr-only">Store overview</h2>
+          <div class="stat-grid">
+            <article class="stat-item"><span>Total products</span><strong id="stat-products">0</strong><small>In the catalog</small></article>
+            <article class="stat-item"><span>New orders</span><strong id="stat-new-orders">0</strong><small>Waiting for review</small></article>
+            <article class="stat-item"><span>All orders</span><strong id="stat-orders">0</strong><small>Order requests received</small></article>
+            <article class="stat-item warning-stat"><span>Low stock</span><strong id="stat-low-stock">0</strong><small id="low-stock-caption">At or below 5 in stock</small></article>
+          </div>
+          <div class="overview-lower">
+            <div class="overview-section"><div class="section-heading"><div><p class="admin-eyebrow">Latest activity</p><h2>Recent orders</h2></div><button class="quiet-button" data-go="orders" type="button">All orders &#8594;</button></div><div class="recent-orders" id="recent-orders"></div></div>
+            <div class="overview-note"><span class="note-mark" aria-hidden="true">!</span><p><strong>Order requests only</strong><br />No online payment is collected. Contact customers to arrange payment and delivery.</p></div>
+          </div>
+        </section>
+
+        <section class="products-view admin-view" id="products-view" aria-labelledby="products-title" hidden>
+          <div class="section-heading page-section-heading"><div><p class="admin-eyebrow">Catalog and inventory</p><h2 id="products-title">Products</h2></div><div class="heading-actions"><button class="quiet-button" data-export="products" type="button">Export CSV</button><button class="primary-button compact-button" id="add-product-button" type="button"><span aria-hidden="true">+</span> Add product</button></div></div>
+          <div class="table-tools"><label class="admin-search">Search products<input id="product-search" type="search" placeholder="Name or category" /></label><label class="filter-select">Show<select id="product-status-filter"><option value="active">Active</option><option value="all">All products</option><option value="archived">Archived</option></select></label><label class="checkbox-field stock-filter"><input id="low-stock-only" type="checkbox" /> Low stock only</label></div>
+          <div class="table-scroll"><table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Inventory</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="products-table"></tbody></table></div>
+          <p class="table-empty" id="products-empty" hidden>No products match this view.</p>
+        </section>
+
+        <section class="orders-view admin-view" id="orders-view" aria-labelledby="orders-title" hidden>
+          <div class="section-heading page-section-heading"><div><p class="admin-eyebrow">Customer requests</p><h2 id="orders-title">Orders</h2></div><div class="heading-actions"><button class="quiet-button" data-export="orders" type="button">Export CSV</button><label class="filter-select">Status<select id="order-status-filter"><option value="all">All orders</option><option value="new">New</option><option value="confirmed">Confirmed</option><option value="fulfilled">Fulfilled</option><option value="cancelled">Cancelled</option></select></label></div></div>
+          <div class="table-scroll"><table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Subtotal</th><th>Status</th><th>Update</th><th><span class="sr-only">Details</span></th></tr></thead><tbody id="orders-table"></tbody></table></div>
+          <p class="table-empty" id="orders-empty" hidden>No orders yet. New requests will appear here.</p>
+        </section>
+        <section class="customers-view admin-view" id="customers-view" aria-labelledby="customers-title" hidden>
+          <div class="section-heading page-section-heading"><div><p class="admin-eyebrow">Order history</p><h2 id="customers-title">Customers</h2></div><button class="quiet-button" data-export="customers" type="button">Export CSV</button></div>
+          <label class="admin-search customer-search">Search customers<input id="customer-search" type="search" placeholder="Name, email, or phone" /></label>
+          <div class="table-scroll"><table><thead><tr><th>Customer</th><th>Orders</th><th>Requested value</th><th>Last order</th><th><span class="sr-only">History</span></th></tr></thead><tbody id="customers-table"></tbody></table></div>
+          <p class="table-empty" id="customers-empty" hidden>No customers yet. Customers appear after an order request.</p>
+        </section>
+        <section class="categories-view admin-view" id="categories-view" aria-labelledby="categories-title" hidden>
+          <div class="section-heading page-section-heading"><div><p class="admin-eyebrow">Catalog organization</p><h2 id="categories-title">Categories</h2></div></div>
+          <form class="category-create-form" id="category-form"><label>New category (English)<input name="name" minlength="2" maxlength="50" placeholder="Category name" required /></label><label>فئة جديدة بالعربية<input name="name_ar" maxlength="50" dir="rtl" /></label><button class="primary-button compact-button" type="submit">Add category <span aria-hidden="true">&#8594;</span></button></form>
+          <p class="form-error" id="category-error" role="alert" hidden></p>
+          <div class="category-list" id="category-list"></div>
+          <p class="table-empty" id="categories-empty" hidden>No categories yet.</p>
+        </section>
+        <section class="outlets-view admin-view" id="outlets-view" aria-labelledby="outlets-admin-title" hidden>
+          <div class="section-heading page-section-heading"><div><p class="admin-eyebrow">Locations and hours</p><h2 id="outlets-admin-title">Outlets</h2></div></div>
+          <form class="outlet-form" id="outlet-form">
+            <input type="hidden" name="id" />
+            <div class="outlet-form-grid">
+              <label>Outlet name (English)<input name="name_en" required minlength="2" maxlength="100" /></label>
+              <label>اسم الفرع بالعربية<input name="name_ar" required minlength="2" maxlength="100" dir="rtl" /></label>
+              <label>Address (English)<textarea name="address_en" required minlength="4" maxlength="300" rows="2"></textarea></label>
+              <label>العنوان بالعربية<textarea name="address_ar" required minlength="4" maxlength="300" rows="2" dir="rtl"></textarea></label>
+              <label>Phone<input name="phone" type="tel" maxlength="40" /></label>
+              <label>Hours (English)<input name="hours_en" maxlength="160" /></label>
+              <label>ساعات العمل<input name="hours_ar" maxlength="160" dir="rtl" /></label>
+            </div>
+            <p class="form-error" id="outlet-error" role="alert" hidden></p>
+            <div class="dialog-actions"><button class="quiet-button" id="cancel-outlet-edit" type="button">Clear form</button><button class="primary-button" type="submit" id="save-outlet">Add outlet <span aria-hidden="true">&#8594;</span></button></div>
+          </form>
+          <div class="outlet-admin-list" id="outlet-admin-list"></div>
+          <p class="table-empty" id="outlets-admin-empty" hidden>No outlets added yet.</p>
+        </section>
+        <section class="settings-view admin-view" id="settings-view" aria-labelledby="settings-title" hidden>
+          <div class="section-heading page-section-heading"><div><p class="admin-eyebrow">Store profile</p><h2 id="settings-title">Settings</h2></div></div>
+          <form class="settings-form" id="settings-form">
+            <div class="settings-grid">
+              <label>Business name (English)<input name="business_name" minlength="2" maxlength="100" required /></label>
+              <label>اسم المتجر بالعربية<input name="business_name_ar" minlength="2" maxlength="100" dir="rtl" /></label>
+              <label>Currency<select name="currency" required><option value="USD">USD - US Dollar</option><option value="SAR">SAR - Saudi Riyal</option><option value="AED">AED - UAE Dirham</option><option value="GBP">GBP - British Pound</option><option value="EUR">EUR - Euro</option><option value="QAR">QAR - Qatari Riyal</option><option value="KWD">KWD - Kuwaiti Dinar</option><option value="BHD">BHD - Bahraini Dinar</option><option value="OMR">OMR - Omani Rial</option></select></label>
+              <label>Number/date locale<input name="locale" minlength="2" maxlength="20" placeholder="en-US" required /></label>
+              <label>Contact email<input name="contact_email" type="email" maxlength="254" /></label>
+              <label>Contact phone<input name="contact_phone" type="tel" maxlength="40" /></label>
+              <label>Low stock alert at<input name="low_stock_threshold" type="number" min="0" max="100000" step="1" required /></label>
+              <label class="settings-address">Business address<textarea name="business_address" maxlength="500" rows="3"></textarea></label>
+              <label class="settings-address">About us (English)<textarea name="about_en" maxlength="2000" rows="4"></textarea></label>
+              <div class="settings-subsection settings-address"><p class="admin-eyebrow">About page content</p><h3>About page text</h3></div>
+              <label>Eyebrow<input name="about_eyebrow_en" maxlength="100" /></label>
+              <label>Page title<input name="about_title_en" maxlength="200" /></label>
+              <label class="settings-address">Intro text<textarea name="about_lead_en" maxlength="2000" rows="3"></textarea></label>
+              <label>Story section label<input name="about_story_eyebrow_en" maxlength="100" /></label>
+              <label class="settings-address">Story heading<input name="about_story_heading_en" maxlength="200" /></label>
+              <label class="settings-address">Story text<textarea name="about_story_en" maxlength="4000" rows="4"></textarea></label>
+              <label class="settings-address">Second story paragraph<textarea name="about_story_secondary_en" maxlength="2000" rows="3"></textarea></label>
+              <div class="settings-subsection settings-address"><p class="admin-eyebrow">Owner section</p><h3>Tell customers who is behind the business</h3></div>
+              <label>Owner name<input name="owner_name" maxlength="100" placeholder="Owner name" /></label>
+              <label>Owner section label<input name="owner_eyebrow_en" maxlength="150" /></label>
+              <label>Owner role<input name="owner_role" maxlength="120" placeholder="Founder and owner" /></label>
+              <label class="settings-address">Owner bio<textarea name="owner_bio" maxlength="2000" rows="4"></textarea></label>
+              <div class="image-upload-field settings-address">
+                <label for="owner-image-file">Owner image</label>
+                <div class="image-preview owner-preview" id="owner-image-preview-wrap">
+                  <img id="owner-image-preview" alt="Owner image preview" hidden />
+                  <span id="owner-image-placeholder">No owner image selected</span>
+                </div>
+                <input id="owner-image-file" type="file" accept="image/jpeg,image/png,image/webp" />
+                <small>JPEG, PNG, or WebP. Maximum file size: 5 MB.</small>
+                <button class="table-action danger logo-remove" id="remove-owner-image" type="button">Remove owner image</button>
+              </div>
+              <div class="settings-subsection settings-address"><p class="admin-eyebrow">About page design</p><h3>Colors</h3></div>
+              <label>Primary text color<input name="about_primary_color" type="color" /></label>
+              <label>Hero background color<input name="about_background_color" type="color" /></label>
+              <label>Section background color<input name="about_surface_color" type="color" /></label>
+              <label>Accent color<input name="about_accent_color" type="color" /></label>
+              <label>Values section label<input name="about_values_eyebrow_en" maxlength="100" /></label>
+              <label>Contact section label<input name="about_contact_eyebrow_en" maxlength="100" /></label>
+              <label>Contact section title<input name="about_contact_title_en" maxlength="150" /></label>
+              <label class="settings-address">Contact section text<textarea name="about_contact_text_en" maxlength="500" rows="3"></textarea></label>
+              <label class="settings-address">نبذة عنا بالعربية<textarea name="about_ar" maxlength="2000" rows="4" dir="rtl"></textarea></label>
+              <div class="image-upload-field settings-address">
+                <label for="store-logo-file">Store logo or icon</label>
+                <div class="image-preview logo-preview" id="store-logo-preview-wrap">
+                  <img id="store-logo-preview" alt="Store logo preview" hidden />
+                  <span id="store-logo-placeholder">Using the Al Majid brand mark</span>
+                </div>
+                <input id="store-logo-file" type="file" accept="image/jpeg,image/png,image/webp" />
+                <small>JPEG, PNG, or WebP. Maximum file size: 5 MB.</small>
+                <button class="table-action danger logo-remove" id="remove-store-logo" type="button">Use default mark</button>
+              </div>
+              <div class="image-upload-field settings-address">
+                <label for="store-cover-file">Storefront cover image</label>
+                <div class="image-preview cover-preview" id="store-cover-preview-wrap">
+                  <img id="store-cover-preview" alt="Storefront cover preview" hidden />
+                  <span id="store-cover-placeholder">Using the illustrated hero</span>
+                </div>
+                <input id="store-cover-file" type="file" accept="image/jpeg,image/png,image/webp" />
+                <small>Use a wide JPEG, PNG, or WebP image. Maximum file size: 5 MB.</small>
+                <label class="cover-fit-control">Image display
+                  <select name="cover_fit">
+                    <option value="cover">Crop to fill hero</option>
+                    <option value="contain">Fit entire image</option>
+                  </select>
+                </label>
+                <button class="table-action danger logo-remove" id="remove-store-cover" type="button">Use illustrated hero</button>
+              </div>
+            </div>
+            <p class="form-error" id="settings-error" role="alert" hidden></p>
+            <button class="primary-button" type="submit" id="save-settings">Save settings <span aria-hidden="true">&#8594;</span></button>
+          </form>
+        </section>
+        <p class="dashboard-error" id="dashboard-error" role="alert" hidden></p>
+      </section>
+    </main>
+
+    <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-dialog-title">
+      <form id="product-form" method="dialog">
+        <div class="dialog-heading"><div><p class="admin-eyebrow">Catalog</p><h2 id="product-dialog-title">Add product</h2></div><button class="dialog-close" type="button" id="close-product-dialog" aria-label="Close">&#215;</button></div>
+        <div class="product-form-grid">
+          <label class="wide-field">Product name<input name="name" required minlength="2" maxlength="100" /></label>
+          <label class="wide-field">اسم المنتج بالعربية<input name="name_ar" maxlength="100" dir="rtl" /></label>
+          <label class="wide-field">Product description<textarea name="description" maxlength="2000" rows="3" placeholder="What makes this product useful?"></textarea></label>
+          <label class="wide-field">وصف المنتج بالعربية<textarea name="description_ar" maxlength="2000" rows="3" dir="rtl"></textarea></label>
+          <label>Category<input name="category" required minlength="2" maxlength="50" list="category-options" /><datalist id="category-options"><option>Kitchen</option><option>Storage</option><option>Cleaning</option><option>Home &amp; garden</option></datalist></label>
+          <label>الفئة بالعربية<input name="category_ar" maxlength="50" dir="rtl" /></label>
+          <label>Price<input name="price" type="number" min="0" max="1000000" step="0.01" required /></label>
+          <label>Stock quantity<input name="stock_quantity" type="number" min="0" max="1000000" step="1" required /></label>
+          <div class="image-upload-field wide-field">
+            <label for="product-image">Product photo</label>
+            <div class="image-preview" id="image-preview">
+              <img id="product-image-preview" alt="Product photo preview" hidden />
+              <span id="image-preview-placeholder">No photo selected</span>
+            </div>
+            <input id="product-image" type="file" accept="image/jpeg,image/png,image/webp" />
+            <small>JPEG, PNG, or WebP. Maximum file size: 5 MB.</small>
+          </div>
+          <label>Artwork style<select name="art" required><option value="basket">Basket</option><option value="canister">Canister</option><option value="stool">Stool</option><option value="planter">Planter</option><option value="bottle">Bottle</option><option value="storage">Storage box</option><option value="bucket">Bucket</option><option value="colander">Colander</option></select></label>
+          <label>Product color<input name="color" type="color" value="#648b75" /></label>
+          <label>Artwork background<input name="background_color" type="color" value="#e4eee6" /></label>
+          <label>Badge<input name="badge" maxlength="40" /></label>
+          <label>Color name<input name="note" maxlength="50" /></label>
+          <label class="checkbox-field wide-field"><input name="active" type="checkbox" checked /> Visible in storefront</label>
+        </div>
+        <p class="form-error" id="product-error" role="alert" hidden></p>
+        <div class="dialog-actions"><button class="quiet-button" type="button" id="cancel-product">Cancel</button><button class="primary-button" type="submit" id="save-product">Save product <span aria-hidden="true">&#8594;</span></button></div>
+      </form>
+    </dialog>
+    <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
+      <div class="dialog-heading"><div><p class="admin-eyebrow">Order request</p><h2 id="order-dialog-title">Order details</h2></div><button class="dialog-close" type="button" id="close-order-dialog" aria-label="Close">&#215;</button></div>
+      <div id="order-detail-content"></div>
+      <div class="dialog-actions"><button class="quiet-button" type="button" id="print-order">Print order</button><button class="primary-button" type="button" id="close-order-details">Done</button></div>
+    </dialog>
+    <div class="admin-toast" id="admin-toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
